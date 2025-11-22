@@ -1,0 +1,533 @@
+/* PAYROLL APPROVAL STYLES */
+
+.payroll-approval-container {
+  padding: 20px;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+}
+
+.payroll-approval-container h2 {
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.tab-button {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  color: #0066cc;
+  border-bottom-color: #0066cc;
+}
+
+.tab-button:hover {
+  color: #0066cc;
+}
+
+.tab-content {
+  background: var(--color-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.tab-content h3 {
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+/* FORM GROUPS */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* BUTTONS */
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #0066cc;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0052a3;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #da190b;
+}
+
+.btn-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: #e68900;
+}
+
+.btn-info {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-info:hover:not(:disabled) {
+  background-color: #0b7dda;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* ALERTS */
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.alert-error {
+  background-color: #fee;
+  color: #c00;
+  border-left: 4px solid #c00;
+}
+
+.alert-success {
+  background-color: #efe;
+  color: #060;
+  border-left: 4px solid #060;
+}
+
+/* RECORDS TABLE */
+
+.records-table {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.records-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg);
+}
+
+.records-table th {
+  background-color: #f5f5f5;
+  color: var(--color-text);
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.records-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.records-table tr:hover {
+  background-color: #fafafa;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f0f0f0;
+  color: var(--color-text-secondary);
+}
+
+.net-pay {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+/* PERIOD ACTIONS */
+
+.period-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* MODAL */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--color-bg);
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--color-text-tertiary);
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--color-text);
+}
+
+.modal-content h4 {
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+/* RECORD DETAILS */
+
+.record-details {
+  margin: 20px 0;
+}
+
+.record-details h5 {
+  color: #0066cc;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.details-grid > div {
+  background: var(--color-bg-secondary);
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.details-grid strong {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.details-grid p {
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* NET PAY DISPLAY */
+
+.net-pay-display {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.net-pay-display strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.net-pay-display .amount {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* BUTTON GROUP */
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-group .btn {
+  flex: 1;
+}
+
+/* SUMMARY STYLES */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.summary-card .big-number {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.deductions-breakdown,
+.status-breakdown {
+  background: var(--color-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.deductions-breakdown h4,
+.status-breakdown h4 {
+  color: var(--color-text);
+  margin-bottom: 15px;
+}
+
+.breakdown-grid,
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.breakdown-grid > div,
+.status-grid > div {
+  background: var(--color-bg-secondary);
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.breakdown-grid strong,
+.status-grid strong {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.breakdown-grid p {
+  color: #0066cc;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.status-grid > div {
+  text-align: left;
+}
+
+/* ============================================================================
+   DARK MODE - PAYROLL APPROVAL
+   ============================================================================ */
+
+[data-theme='dark'] .payroll-approval-container {
+  background: var(--color-gray-100);
+}
+
+[data-theme='dark'] .payroll-approval-container h2,
+[data-theme='dark'] .tab-content h3,
+[data-theme='dark'] .modal-content h4,
+[data-theme='dark'] .record-details h5 {
+  color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .tabs {
+  border-bottom-color: var(--color-gray-300);
+}
+
+[data-theme='dark'] .tab-button {
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .tab-button.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+[data-theme='dark'] .tab-content {
+  background: var(--color-gray-50);
+}
+
+[data-theme='dark'] .form-group label {
+  color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .form-group select,
+[data-theme='dark'] .form-group textarea {
+  background-color: var(--color-gray-75);
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .records-table table {
+  background: var(--color-gray-50);
+}
+
+[data-theme='dark'] .records-table th {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-800);
+  border-bottom-color: var(--color-gray-300);
+}
+
+[data-theme='dark'] .records-table td {
+  border-bottom-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+[data-theme='dark'] .records-table tr:hover {
+  background-color: var(--color-gray-100);
+}
+
+[data-theme='dark'] .modal-content {
+  background: var(--color-gray-50);
+}
+
+[data-theme='dark'] .details-grid > div {
+  background: var(--color-gray-100);
+}
+
+[data-theme='dark'] .details-grid strong {
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .details-grid p {
+  color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .deductions-breakdown,
+[data-theme='dark'] .status-breakdown {
+  background: var(--color-gray-50);
+}
+
+[data-theme='dark'] .deductions-breakdown h4,
+[data-theme='dark'] .status-breakdown h4 {
+  color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .breakdown-grid > div,
+[data-theme='dark'] .status-grid > div {
+  background: var(--color-gray-100);
+}
+
+[data-theme='dark'] .breakdown-grid strong,
+[data-theme='dark'] .status-grid strong {
+  color: var(--color-gray-600);
+}
+
+

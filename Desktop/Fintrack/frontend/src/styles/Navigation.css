@@ -1,0 +1,371 @@
+/**
+ * Unified Navigation Bar Styles
+ * Applied consistently across all dashboards
+ */
+
+/* ============================================================================
+   SUPERVISOR/HR HEAD/HR STAFF HEADER & NAVBAR
+   ============================================================================ */
+
+.supervisor-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-bg-secondary);
+}
+
+.supervisor-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+  height: 70px;
+  min-height: 70px;
+}
+
+.supervisor-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.supervisor-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.supervisor-header .header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.supervisor-header .user-info {
+  font-size: 0.95rem;
+  opacity: 0.95;
+  color: white;
+}
+
+.supervisor-header .logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.supervisor-header .logout-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: white;
+}
+
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================================
+   SUPERVISOR/HR SIDEBAR
+   ============================================================================ */
+
+.supervisor-sidebar {
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  width: 250px;
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+}
+
+.supervisor-sidebar.closed {
+  transform: translateX(-100%);
+  box-shadow: none;
+}
+
+.supervisor-sidebar .nav-header {
+  padding: 0 1.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.75rem;
+}
+
+.supervisor-sidebar .nav-header h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: black;
+  font-weight: 600;
+}
+
+.supervisor-sidebar .nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.supervisor-sidebar .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 1.5rem;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.supervisor-sidebar .nav-item:hover {
+  background: #f5f7ff;
+  color: #667eea;
+  padding-left: 2.25rem;
+}
+
+.supervisor-sidebar .nav-item.active {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-right: 4px solid #667eea;
+}
+
+.supervisor-sidebar .nav-item .icon {
+  font-size: 1.1rem;
+}
+
+.supervisor-sidebar .nav-item .label {
+  flex: 1;
+}
+
+/* ============================================================================
+   DASHBOARD CONTENT AREA
+   ============================================================================ */
+
+.supervisor-content {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.supervisor-main-content,
+.supervisor-main {
+  flex: 1;
+  transition: all 0.3s ease;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+}
+
+
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .supervisor-header {
+    padding: 1rem;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 60px;
+  }
+
+  .supervisor-header h1 {
+    font-size: 1.2rem;
+    flex: 1;
+  }
+
+  .supervisor-header .header-right {
+    gap: 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .supervisor-sidebar {
+    width: 100%;
+    top: 60px;
+    min-height: auto;
+  }
+
+  .supervisor-main-content,
+  .supervisor-main {
+    margin-left: 0;
+  }
+
+  .supervisor-sidebar .nav-item {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .supervisor-sidebar .nav-item:hover {
+    padding-left: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .supervisor-header {
+    padding: 0.75rem;
+    height: auto;
+    min-height: 50px;
+  }
+
+  .supervisor-header h1 {
+    font-size: 1rem;
+  }
+
+  .supervisor-header .user-info {
+    display: none;
+  }
+
+  .supervisor-header .header-right {
+    gap: 0.5rem;
+  }
+
+  .supervisor-header .logout-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .supervisor-sidebar {
+    top: 50px;
+    min-height: auto;
+  }
+
+  .supervisor-main-content,
+  .supervisor-main {
+    height: auto;
+  }
+
+  .supervisor-sidebar .nav-header {
+    padding: 0 1.5rem 1rem;
+  }
+
+  .supervisor-sidebar .nav-header h2 {
+    font-size: 0.95rem;
+  }
+
+  .supervisor-sidebar .nav-item {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .supervisor-sidebar .nav-item .icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================================================
+   REMOVE CONFLICTING GLOBAL NAV
+   ============================================================================ */
+
+/* Override the conflicting .nav styles from App.css */
+.nav {
+  background-color: transparent !important;
+  display: none !important;
+}
+
+/* ============================================================================
+   DARK MODE NAVIGATION STYLES
+   ============================================================================ */
+
+[data-theme='dark'] .supervisor-header {
+  background: linear-gradient(135deg, #7c8ffd 0%, #9d6ec7 100%);
+  box-shadow: 0 4px 12px rgba(124, 143, 253, 0.3);
+}
+
+[data-theme='dark'] .supervisor-sidebar {
+  background: var(--color-gray-100);
+  border-right: 1px solid var(--color-gray-300);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .supervisor-sidebar .nav-header {
+  border-bottom: 2px solid var(--color-gray-300);
+}
+
+[data-theme='dark'] .supervisor-sidebar .nav-header h2 {
+  color: black;
+}
+
+[data-theme='dark'] .supervisor-sidebar .nav-item {
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .supervisor-sidebar .nav-item:hover {
+  background: var(--color-gray-200);
+  color: var(--color-primary-light);
+}
+
+[data-theme='dark'] .supervisor-sidebar .nav-item.active {
+  background: linear-gradient(90deg, #7c8ffd 0%, #9d6ec7 100%);
+  color: white;
+  border-right: 4px solid #7c8ffd;
+}
+
+[data-theme='dark'] .supervisor-dashboard-container {
+  background: var(--color-gray-50);
+}
+
+[data-theme='dark'] .menu-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme='dark'] .menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .supervisor-header:not([data-theme='light']) {
+    background: linear-gradient(135deg, #7c8ffd 0%, #9d6ec7 100%);
+  }
+
+  .supervisor-sidebar:not([data-theme='light']) {
+    background: var(--color-gray-100);
+    border-right: 1px solid var(--color-gray-300);
+  }
+
+  .supervisor-sidebar:not([data-theme='light']) .nav-header h2 {
+    color: var(--color-primary-light);
+  }
+
+  .supervisor-sidebar:not([data-theme='light']) .nav-item {
+    color: var(--color-gray-600);
+  }
+
+  .supervisor-sidebar:not([data-theme='light']) .nav-item:hover {
+    background: var(--color-gray-200);
+    color: var(--color-primary-light);
+  }
+}
+
+

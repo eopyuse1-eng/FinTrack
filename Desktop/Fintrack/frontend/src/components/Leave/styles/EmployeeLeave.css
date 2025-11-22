@@ -1,0 +1,399 @@
+/* Employee Leave Section Styles */
+.leave-section {
+  width: 100%;
+}
+
+.leave-header {
+  margin-bottom: 2rem;
+}
+
+.leave-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+  color: var(--color-gray-900);
+  font-weight: 600;
+}
+
+.leave-header p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+}
+
+.leave-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.request-leave-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.request-leave-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Leave Status Cards */
+.leave-status-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.leave-card {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.leave-card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.leave-card-title {
+  font-size: 1.1rem;
+  color: var(--color-gray-900);
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.leave-card-count {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+}
+
+/* Calendar */
+.calendar-section {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 4px;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-gray-900);
+  background: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calendar-day:hover {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary);
+}
+
+.calendar-day.other-month {
+  color: var(--color-gray-400);
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-nav button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.calendar-nav button:hover {
+  background: #2563eb;
+}
+
+/* Leave Requests Table */
+.leave-requests-container {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.requests-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.requests-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-900);
+  font-weight: 600;
+}
+
+.filter-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.filter-group select {
+  padding: 0.5rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 4px;
+  background-color: white;
+  color: var(--color-gray-900);
+  cursor: pointer;
+}
+
+.leave-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leave-requests-table thead {
+  background-color: var(--color-gray-50);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.leave-requests-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  font-size: 0.9rem;
+}
+
+.leave-requests-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  color: var(--color-gray-900);
+  font-size: 0.9rem;
+}
+
+.leave-requests-table tbody tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-approved {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+/* ============================================================================
+   DARK MODE - EMPLOYEE LEAVE
+   ============================================================================ */
+
+[data-theme='dark'] .leave-header h2 {
+  color: white;
+}
+
+[data-theme='dark'] .leave-header p {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .leave-card {
+  background: #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .leave-card-icon {
+  color: #7c8ffd;
+}
+
+[data-theme='dark'] .leave-card {
+  background: var(--color-gray-100) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid var(--color-gray-300) !important;
+}
+
+[data-theme='dark'] .leave-card-title {
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .leave-card-count {
+  color: var(--color-gray-600);
+}
+
+[data-theme='dark'] .calendar-section {
+  background: var(--color-gray-100) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='dark'] .calendar-header {
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .calendar-day-header {
+  color: var(--color-primary-light);
+}
+
+[data-theme='dark'] .calendar-day {
+  background: var(--color-gray-200);
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .calendar-day:hover {
+  background-color: var(--color-gray-300);
+  border-color: var(--color-primary-light);
+}
+
+[data-theme='dark'] .calendar-day.other-month {
+  color: var(--color-gray-500);
+}
+
+[data-theme='dark'] .calendar-nav button {
+  background: var(--color-primary);
+}
+
+[data-theme='dark'] .calendar-nav button:hover {
+  background: var(--color-primary-light);
+}
+
+[data-theme='dark'] .leave-requests-container {
+  background: var(--color-gray-100) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='dark'] .requests-header {
+  border-bottom-color: var(--color-gray-300);
+}
+
+[data-theme='dark'] .requests-header h3 {
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .filter-group label {
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .filter-group select {
+  background-color: var(--color-gray-200);
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .leave-requests-table {
+  background: var(--color-gray-100);
+}
+
+[data-theme='dark'] .leave-requests-table thead {
+  background-color: var(--color-gray-200);
+  border-bottom-color: var(--color-gray-300);
+}
+
+[data-theme='dark'] .leave-requests-table th {
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .leave-requests-table td {
+  border-bottom-color: var(--color-gray-300);
+  color: var(--color-gray-900);
+}
+
+[data-theme='dark'] .leave-requests-table tbody tr:hover {
+  background-color: var(--color-gray-200);
+}
+
+[data-theme='dark'] .status-badge {
+  border-radius: 20px;
+}
+
+[data-theme='dark'] .status-pending {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+[data-theme='dark'] .status-approved {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+[data-theme='dark'] .status-rejected {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+[data-theme='dark'] .empty-state {
+  color: var(--color-gray-600);
+}
+
+
