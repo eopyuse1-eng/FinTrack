@@ -41,7 +41,9 @@ const allowedOrigins = [
   'http://localhost:5173',      // Development (Vite)
   'http://127.0.0.1:3000',      // Development localhost
   'http://127.0.0.1:5173',      // Development localhost
-  process.env.FRONTEND_URL || 'https://fintrack.vercel.app', // Production
+  'https://fin-track-one-alpha.vercel.app', // Production Vercel
+  'https://fintrack.vercel.app', // Alternative Vercel URL
+  process.env.FRONTEND_URL || 'https://fin-track-one-alpha.vercel.app', // Production from env
 ];
 
 app.use(cors({
