@@ -84,10 +84,15 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Update last login (async, don't wait)
+    // Update last login
     user.lastLogin = new Date();
     user.loginAttempts = 0;
-    user.save().catch(err => console.error('Error updating user:', err));
+    try {
+      await user.save();
+    } catch (err) {
+      console.error('Error updating user last login:', err);
+      // Continue anyway - login was successful
+    }
 
     // Generate JWT token
     const token = jwt.sign(
@@ -188,7 +193,14 @@ exports.googleAuthCallback = async (req, res) => {
 
     // Redirect to frontend dashboard with token
     const frontendURL = process.env.FRONTEND_URL || 'http://localhost:3000';
-    res.redirect(`${frontendURL}/dashboard?token=${token}`);
+    // Set token in httpOnly cookie instead of URL (more secure)
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
+    res.redirect(`${frontendURL}/dashboard`);
   } catch (error) {
     console.error('Google callback error:', error);
     const frontendURL = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -787,6 +799,31 @@ exports.verifyCodeLogin = async (req, res) => {
       });
     }
 
+    // Check account status BEFORE allowing login
+    if (user.isDisabled) {
+      return res.status(403).json({
+        success: false,
+        message: 'Your account has been disabled',
+        code: 'ACCOUNT_DISABLED',
+      });
+    }
+
+    if (!user.isActive) {
+      return res.status(403).json({
+        success: false,
+        message: 'Your account is inactive',
+        code: 'ACCOUNT_INACTIVE',
+      });
+    }
+
+    if (user.isLocked()) {
+      return res.status(423).json({
+        success: false,
+        message: 'Your account is locked due to too many failed login attempts',
+        code: 'ACCOUNT_LOCKED',
+      });
+    }
+
     // Check if email is verified
     if (!user.isEmailVerified) {
       return res.status(403).json({
@@ -830,7 +867,12 @@ exports.verifyCodeLogin = async (req, res) => {
 
     // Update last login
     user.lastLogin = new Date();
-    user.save().catch(err => console.error('Error updating user:', err));
+    try {
+      await user.save();
+    } catch (err) {
+      console.error('Error updating user last login:', err);
+      // Continue anyway - login was successful
+    }
 
     // Log successful code-based login
     await AuditLog.create({
