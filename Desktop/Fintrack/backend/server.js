@@ -38,34 +38,10 @@ app.use(session({
 }));
 
 // Middleware
-// CORS configuration - Allow multiple origins for development and production
-const allowedOrigins = [
-  'http://localhost:3000',      // Development (npm start)
-  'http://localhost:5173',      // Development (Vite)
-  'http://127.0.0.1:3000',      // Development localhost
-  'http://127.0.0.1:5173',      // Development localhost
-  'https://fin-track-one-alpha.vercel.app', // Production Vercel
-  'https://fintrack.vercel.app', // Alternative Vercel URL
-  'https://fintrackapp.vercel.app', // Another Vercel URL
-  process.env.FRONTEND_URL || 'https://fin-track-one-alpha.vercel.app', // Production from env
-];
-
-// Allow any vercel.app subdomain
-const vercelPattern = /^https:\/\/.*\.vercel\.app$/;
-
+// CORS configuration - Allow all origins in production (temporary fix)
+// TODO: Restrict to specific Vercel domains once deployment is stable
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Check if origin matches allowed list or Vercel pattern
-    if (allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
-      return callback(null, true);
-    }
-    
-    console.log(`⚠️  CORS denied for origin: ${origin}`);
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: true, // Allow all origins temporarily
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
