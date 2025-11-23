@@ -46,9 +46,6 @@ app.use(session({
 // CORS configuration - Support production, preview, and development URLs
 const allowedOrigins = [
   'https://fintrackapp.vercel.app',                              // Production domain
-  'https://fin-track-fintracks-projects-9fd35663.vercel.app',    // Preview domain
-  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app', // Alternative preview
-  'https://fin-track-one-alpha.vercel.app',                      // New preview domain
   'http://localhost:3000',                                       // Local frontend dev
   'http://localhost:5173',                                       // Vite default port
 ];
@@ -56,11 +53,22 @@ const allowedOrigins = [
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or server-side requests)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed from origin: ' + origin));
+    if (!origin) {
+      return callback(null, true);
     }
+    
+    // Allow exact matches from allowedOrigins
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // Allow all Vercel preview URLs (*.vercel.app)
+    if (origin.includes('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // Reject everything else
+    callback(new Error('CORS not allowed from origin: ' + origin));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
