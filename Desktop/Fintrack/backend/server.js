@@ -51,6 +51,7 @@ app.use(cors({
 
     // Allow production and localhost explicitly
     const allowedOrigins = [
+      'http://localhost:8080',
       'https://fin-track-i2fp4zq4t-fintracks-projects-9fd35663.vercel.app',
       'https://fin-track-git-main-fintracks-projects-9fd35663.vercel.app',
       'https://fintrackapp.vercel.app',
