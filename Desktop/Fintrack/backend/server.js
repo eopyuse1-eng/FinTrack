@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 // Import Passport configuration
@@ -30,6 +31,10 @@ app.use(session({
   secret: process.env.JWT_SECRET || 'your-secret-key',
   resave: false,
   saveUninitialized: false,
+  store: new MongoStore({
+    mongoUrl: process.env.MONGO_URI,
+    touchAfter: 24 * 3600, // Lazy session update (in seconds)
+  }),
   cookie: { 
     secure: process.env.NODE_ENV === 'production', // HTTPS only in production
     sameSite: 'lax',
