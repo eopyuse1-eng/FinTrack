@@ -46,29 +46,20 @@ app.use(session({
 // CORS configuration - Support production, preview, and development URLs
 // CORS configuration - Support production, preview, and development URLs
 const allowedOrigins = [
-  'https://fintrackapp.vercel.app',                     
-  'https://fin-track-one-alpha.vercel.app',             
-  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app',
+  'https://fintrackapp.vercel.app', // Production
   'http://localhost:3000',
   'http://localhost:5173',
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow server-to-server or mobile requests with no Origin
-    if (!origin) return callback(null, true);
+    if (!origin) return callback(null, true); // server-to-server or mobile requests
 
-    // Allow known domains
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
+    if (allowedOrigins.includes(origin)) return callback(null, true);
 
-    // Allow all Vercel preview deployments (*.vercel.app)
-    if (origin.includes('.vercel.app')) {
-      return callback(null, true);
-    }
+    // Allow all Vercel preview deployments dynamically
+    if (origin.endsWith('.vercel.app')) return callback(null, true);
 
-    // Block unknown origins
     console.log('❌ Blocked by CORS:', origin);
     return callback(new Error('CORS not allowed from origin: ' + origin));
   },
@@ -77,9 +68,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Fix preflight OPTION request handling
+// Handle preflight requests
 app.options('*', cors());
-
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
