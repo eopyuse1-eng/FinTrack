@@ -152,7 +152,7 @@ function Login() {
         } else if (data.code === 'EMAIL_NOT_VERIFIED') {
           setError('Email not verified. Please use "Sign in with Google" first.');
           setShowLocalLogin(false);
-          setIsEmailVerified(false);
+          setIsEmailVerified(true);
         } else if (data.code === 'ACCOUNT_DISABLED') {
           setError(data.message || 'This account has been disabled.');
         } else {
