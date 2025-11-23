@@ -46,15 +46,20 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',      // Development localhost
   'https://fin-track-one-alpha.vercel.app', // Production Vercel
   'https://fintrack.vercel.app', // Alternative Vercel URL
+  'https://fintrackapp.vercel.app', // Another Vercel URL
   process.env.FRONTEND_URL || 'https://fin-track-one-alpha.vercel.app', // Production from env
 ];
+
+// Allow any vercel.app subdomain
+const vercelPattern = /^https:\/\/.*\.vercel\.app$/;
 
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.includes(origin)) {
+    // Check if origin matches allowed list or Vercel pattern
+    if (allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
       return callback(null, true);
     }
     
