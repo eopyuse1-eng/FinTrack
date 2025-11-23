@@ -273,6 +273,7 @@ app.listen(PORT, () => {
 ║  FinTrack HRIS API Server Running    ║
 ║  Port: ${PORT}                        ║
 ║  API: http://localhost:${PORT}       ║
+║  CORS: All origins allowed           ║
 ╚══════════════════════════════════════╝
   `);
   console.log('Available endpoints:');
