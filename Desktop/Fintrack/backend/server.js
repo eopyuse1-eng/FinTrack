@@ -10,6 +10,9 @@ require('dotenv').config();
 // Import Passport configuration
 require('./config/passport');
 
+// Import database connection manager
+const { connectToDatabase, setupConnectionListeners, isConnectionHealthy } = require('./utils/dbConnection');
+
 // Import routes and middleware
 const authRoutes = require('./routes/auth');
 const authRoutesNew = require('./routes/authRoutes');
@@ -68,23 +71,16 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  maxPoolSize: 10,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 45000,
-  socketKeepAliveEnabled: true,
-  socketKeepAliveInitialDelay: 10000,
-  retryWrites: true,
-})
-  .then(() => console.log('✓ MongoDB connected'))
-  .catch(err => {
-    console.error('✗ MongoDB connection error:', err.message);
-    // Don't exit - let the app try to reconnect
-    console.log('Retrying connection...');
-  });
+// MongoDB Connection with retry logic
+(async () => {
+  try {
+    await connectToDatabase(process.env.MONGO_URI);
+    setupConnectionListeners();
+  } catch (err) {
+    console.error('Failed to initialize database connection:', err.message);
+    console.log('⚠️  Server starting without database - requests will fail until connection is restored');
+  }
+})();
 
 // PRODUCTION FIX: Auto-seed government tax tables on startup
 const GovernmentTaxTables = require('./models/GovernmentTaxTables');
@@ -276,11 +272,15 @@ app.use('/api/performance-evaluations', performanceEvaluationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  const dbConnected = mongoose.connection.readyState === 1; // 1 = connected
-  res.json({ 
-    status: 'ok', 
+  const dbConnected = isConnectionHealthy();
+  const status = dbConnected ? 'healthy' : 'degraded';
+  const statusCode = dbConnected ? 200 : 503;
+  
+  res.status(statusCode).json({ 
+    status: status,
     timestamp: new Date(),
     database: dbConnected ? 'connected' : 'disconnected',
+    uptime: process.uptime(),
   });
 });
 
