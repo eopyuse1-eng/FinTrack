@@ -48,6 +48,7 @@ const allowedOrigins = [
   'https://fintrackapp.vercel.app',                              // Production domain
   'https://fin-track-fintracks-projects-9fd35663.vercel.app',    // Preview domain
   'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app', // Alternative preview
+  'https://fin-track-one-alpha.vercel.app',                      // New preview domain
   'http://localhost:3000',                                       // Local frontend dev
   'http://localhost:5173',                                       // Vite default port
 ];
