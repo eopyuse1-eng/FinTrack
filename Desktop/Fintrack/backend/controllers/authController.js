@@ -32,8 +32,22 @@ exports.login = async (req, res) => {
     }
 
     console.log(`📧 Looking up user: ${email}`);
-    const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
-    console.timeEnd(`Login - DB Query for ${email}`);
+    
+    let user;
+    try {
+      user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+    } catch (dbError) {
+      console.error('Database error during user lookup:', dbError.message);
+      // If it's a timeout, return a helpful error
+      if (dbError.message.includes('timed out') || dbError.message.includes('buffering')) {
+        return res.status(503).json({
+          success: false,
+          message: 'Database temporarily unavailable. Please try again in a moment.',
+          code: 'DB_TIMEOUT',
+        });
+      }
+      throw dbError;
+    }
     
     if (!user) {
       return res.status(401).json({
@@ -380,7 +394,20 @@ exports.checkEmailVerification = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    let user;
+    try {
+      user = await User.findOne({ email: email.toLowerCase() });
+    } catch (dbError) {
+      console.error('Database error during verification check:', dbError.message);
+      if (dbError.message.includes('timed out') || dbError.message.includes('buffering')) {
+        return res.status(503).json({
+          success: false,
+          message: 'Database temporarily unavailable. Please try again.',
+          code: 'DB_TIMEOUT',
+        });
+      }
+      throw dbError;
+    }
 
     if (!user) {
       return res.status(404).json({

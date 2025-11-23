@@ -72,9 +72,19 @@ app.use(passport.session());
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  socketKeepAliveEnabled: true,
+  socketKeepAliveInitialDelay: 10000,
+  retryWrites: true,
 })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+  .then(() => console.log('✓ MongoDB connected'))
+  .catch(err => {
+    console.error('✗ MongoDB connection error:', err.message);
+    // Don't exit - let the app try to reconnect
+    console.log('Retrying connection...');
+  });
 
 // PRODUCTION FIX: Auto-seed government tax tables on startup
 const GovernmentTaxTables = require('./models/GovernmentTaxTables');
@@ -121,7 +131,16 @@ const initializeTaxTables = async () => {
 
 // Initialize tax tables after DB connection
 mongoose.connection.on('connected', () => {
+  console.log('✓ Mongoose connected to MongoDB');
   initializeTaxTables();
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('✗ MongoDB connection error:', err.message);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️ Mongoose disconnected from MongoDB');
 });
 
 // Initialize rate limit cleanup
@@ -257,7 +276,12 @@ app.use('/api/performance-evaluations', performanceEvaluationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date() });
+  const dbConnected = mongoose.connection.readyState === 1; // 1 = connected
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date(),
+    database: dbConnected ? 'connected' : 'disconnected',
+  });
 });
 
 // Start Server
