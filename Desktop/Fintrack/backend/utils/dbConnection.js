@@ -21,8 +21,6 @@ async function connectToDatabase(mongoUri) {
       maxIdleTimeMS: 30000,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      socketKeepAliveEnabled: true,
-      socketKeepAliveInitialDelay: 10000,
       retryWrites: true,
       family: 4, // Force IPv4
     });
