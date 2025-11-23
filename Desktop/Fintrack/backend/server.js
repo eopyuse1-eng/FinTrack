@@ -38,10 +38,23 @@ app.use(session({
 }));
 
 // Middleware
-// CORS configuration - Allow all origins in production (temporary fix)
-// TODO: Restrict to specific Vercel domains once deployment is stable
+// CORS configuration - Support production, preview, and development URLs
+const allowedOrigins = [
+  'https://fintrackapp.vercel.app',                              // Production domain
+  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app', // Preview domain
+  'http://localhost:3000',                                       // Local frontend dev
+  'http://localhost:5173',                                       // Vite default port
+];
+
 app.use(cors({
-  origin: true, // Allow all origins temporarily
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or server-side requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed from origin: ' + origin));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -273,10 +286,15 @@ app.listen(PORT, () => {
 ║  FinTrack HRIS API Server Running    ║
 ║  Port: ${PORT}                        ║
 ║  API: http://localhost:${PORT}       ║
-║  CORS: All origins allowed           ║
+║  CORS: Production & Preview URLs     ║
 ╚══════════════════════════════════════╝
   `);
-  console.log('Available endpoints:');
+  console.log('Allowed Origins:');
+  console.log('  ✓ https://fintrackapp.vercel.app (Production)');
+  console.log('  ✓ https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app (Preview)');
+  console.log('  ✓ http://localhost:3000 (Dev)');
+  console.log('  ✓ http://localhost:5173 (Vite)');
+  console.log('\nAvailable endpoints:');
   console.log('  POST   /api/auth/login - Login');
   console.log('  POST   /api/auth/logout - Logout');
   console.log('  POST   /api/auth/register - Register user (role-based hierarchy)');
