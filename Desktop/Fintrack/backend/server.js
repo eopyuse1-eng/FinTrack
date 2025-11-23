@@ -41,7 +41,8 @@ app.use(session({
 // CORS configuration - Support production, preview, and development URLs
 const allowedOrigins = [
   'https://fintrackapp.vercel.app',                              // Production domain
-  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app', // Preview domain
+  'https://fin-track-fintracks-projects-9fd35663.vercel.app',    // Preview domain
+  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app', // Alternative preview
   'http://localhost:3000',                                       // Local frontend dev
   'http://localhost:5173',                                       // Vite default port
 ];
