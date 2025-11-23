@@ -44,37 +44,41 @@ app.use(session({
 
 // Middleware
 // CORS configuration - Support production, preview, and development URLs
+// CORS configuration - Support production, preview, and development URLs
 const allowedOrigins = [
-  'https://fintrackapp.vercel.app',                              // Production domain
-  'http://localhost:3000',                                       // Local frontend dev
-  'http://localhost:5173',                                       // Vite default port
+  'https://fintrackapp.vercel.app',                     
+  'https://fin-track-one-alpha.vercel.app',             
+  'https://fin-track-1jpopugyo-fintracks-projects-9fd35663.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5173',
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or server-side requests)
-    if (!origin) {
-      return callback(null, true);
-    }
-    
-    // Allow exact matches from allowedOrigins
+    // Allow server-to-server or mobile requests with no Origin
+    if (!origin) return callback(null, true);
+
+    // Allow known domains
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    
-    // Allow all Vercel preview URLs (*.vercel.app)
+
+    // Allow all Vercel preview deployments (*.vercel.app)
     if (origin.includes('.vercel.app')) {
       return callback(null, true);
     }
-    
-    // Reject everything else
-    callback(new Error('CORS not allowed from origin: ' + origin));
+
+    // Block unknown origins
+    console.log('❌ Blocked by CORS:', origin);
+    return callback(new Error('CORS not allowed from origin: ' + origin));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-app.use(express.json());
+
+// Fix preflight OPTION request handling
+app.options('*', cors());
 
 // Passport middleware
 app.use(passport.initialize());
